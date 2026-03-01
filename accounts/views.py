@@ -47,9 +47,6 @@ def jwt_login_required(view_func):
 
     return _wrapped_view
 
-@jwt_login_required
-def Home(request):
-    return render(request, "home.html", {"jwt_user": request.jwt_user})
 
 def RegisterView(request):
     if request.method == 'POST':

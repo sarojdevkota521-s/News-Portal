@@ -1,3 +1,5 @@
 django
 djangorestframework
 pyjwt
+ckeditor
+Pillow

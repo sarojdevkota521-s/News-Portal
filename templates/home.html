@@ -1,8 +1,32 @@
 {% extends 'main.html' %}
 {% block content%}
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}!</p>
-        <a href="{% url 'logout' %}">Logout</a>
+    {% if jwt_user %}
+        <p>Welcome, {{ jwt_user.username }}!</p>
+        <hr>
+        <h2>News Portal</h2>
+        <p>Explore the latest news and updates.</p>
+        {% for n in news %}
+
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+    
+    <h3>
+        <a href="{% url 'news-detail' n.id %}" 
+           style="text-decoration: none; color: inherit;">
+            {{ n.title }}
+        </a>
+    </h3>
+
+    <img src="{{ n.images.url }}" alt="{{ n.title }}" style="max-width: 200px;">
+
+    <p>
+        {{ n.content|truncatewords:5 }}
+    </p>
+
+    <a href="{% url 'news-detail' n.id %}">Show More</a>
+
+    </div>
+        {% endfor %}
+
     {% else %}
         <p>Please log in or register to access the portal.</p>
         <a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a>

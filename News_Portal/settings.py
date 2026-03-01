@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
     'accounts',
     'base',
 ]
@@ -117,7 +119,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# STATIC_URL = 'static/'
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+# ...
 STATIC_URL = 'static/'
+STATIC_ROOT = Path(BASE_DIR) / 'static'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -133,3 +148,6 @@ EMAIL_USE_TLS = True
 # after enabling 2-step verification in your Google Account security settings
 EMAIL_HOST_USER = 'sarojdevkota521@gmail.com'
 EMAIL_HOST_PASSWORD = 'ovfb qqop yial cwhw'
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
