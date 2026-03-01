@@ -1,13 +1,9 @@
-<html>
-<head>
-    <title>Home - News Portal</title>   
-</head>
-<body>  
+{% extends 'main.html' %}
+{% block content%} 
     <h1>Login to Your Account</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Login</button>
     </form> 
-</body>
-</html>
+{% endblock %}

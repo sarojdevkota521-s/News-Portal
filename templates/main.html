@@ -13,6 +13,12 @@
             <a href="{% url 'register' %}">Register</a>
         {% endif %}
         <hr>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        
     </nav>
    {% block content%}
    
