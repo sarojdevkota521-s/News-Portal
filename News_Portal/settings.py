@@ -32,6 +32,7 @@ AUTH_USER_MODEL = 'accounts.User'
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -71,7 +72,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'News_Portal.wsgi.application'
+# WSGI_APPLICATION = 'News_Portal.wsgi.application'
+
+ASGI_APPLICATION = 'News_Portal.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)], # Default Redis host and port
+        },
+    },
+}
 
 
 # Database
