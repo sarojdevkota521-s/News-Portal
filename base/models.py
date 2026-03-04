@@ -18,10 +18,21 @@ class News(models.Model):
     images = models.ImageField(upload_to='news_images/')
     slug = models.SlugField(max_length=255, unique=True)
     content = RichTextField()
+    view = models.PositiveIntegerField(default=0)
     published_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
+class NewsView(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('news', 'user')
+
+    
     
 class Comment(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='comments')

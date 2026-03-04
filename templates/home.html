@@ -5,12 +5,12 @@
         <hr>
         <h2>News Portal</h2>
         <p>Explore the latest news and updates.</p>
-
-        <div>
+        <div style="margin-bottom: 20px;">
             <form method="get" action="{% url 'home' %}">
                 <input type="text" name="q" placeholder="Search news..." value="{{ request.GET.q }}">
                 <button type="submit">Search</button>
         </div>
+        
         {% for n in news %}
 
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
@@ -28,9 +28,19 @@
         {{ n.content|truncatewords:5 }}
     </p>
 
-    <a href="{% url 'news-detail' n.id %}">Show More</a>
+    <a href="{% url 'news-detail' n.slug %}">Show More</a>
+    <p style="text-align: right;"><small>{{ n.published_at }} | {{ n.comments.count }} Comments |   {{ n.view }} views</small></p>
+    <p style="text-align: right;"><small>Tags: 
+        {% for tag in n.tags.all %}
+            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </small></p>
+    <p style="text-align: right;"><small></small></p>
+   
 
     </div>
+        {% empty %}
+        <h1>No news available.</h1>
         {% endfor %}
 
     {% else %}
