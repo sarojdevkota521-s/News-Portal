@@ -6,4 +6,21 @@
     <img src="{{ news.images.url }}" alt="{{ news.title }}" style="max-width: 100%; height: auto;">
     <p>{{ news.content }}</p>
 </div>
+<div>
+    <h3>Add Comments </h3>
+    <form method="post" action="{% url 'add_comment' news.id %}">
+        {% csrf_token %}
+        <textarea name="content" placeholder="Write your comment here..." required></textarea>
+        <button type="submit">Enter</button>
+    </form>
+    <h3>Comments</h3>
+    {% for comment in news.comments.all %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+            <p><strong>@{{ comment.user.username }}</strong>:{{ comment.content }}</p>
+           
+            <p style="text-align: right;"><small>{{ comment.created_at|timesince }}</small></p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
 {% endblock %}

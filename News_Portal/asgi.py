@@ -11,15 +11,18 @@ import os
 
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
+from base.consumer import MyConsumer
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'News_Portal.settings')
 
 application = get_asgi_application()
+from django.urls import path
 
-ws_patterns = [ 
+# ws_patterns = [ 
+#     path('ws/test/', MyConsumer.as_asgi()),
 
-]
-application = ProtocolTypeRouter({
+# ]
+# application = ProtocolTypeRouter({
   
-    'websocket':  URLRouter(ws_patterns),
-})
+#     'websocket':  URLRouter(ws_patterns),
+# })

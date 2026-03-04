@@ -5,6 +5,12 @@
         <hr>
         <h2>News Portal</h2>
         <p>Explore the latest news and updates.</p>
+
+        <div>
+            <form method="get" action="{% url 'home' %}">
+                <input type="text" name="q" placeholder="Search news..." value="{{ request.GET.q }}">
+                <button type="submit">Search</button>
+        </div>
         {% for n in news %}
 
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
