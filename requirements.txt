@@ -5,3 +5,4 @@ ckeditor
 Pillow
 channels
 channels-redis
+nepali-datetime

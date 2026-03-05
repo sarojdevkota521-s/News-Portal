@@ -2,6 +2,9 @@
 {% block content%}
     {% if jwt_user %}
         <p>Welcome, {{ jwt_user.username }}!</p>
+       <p>  Weather: {{ temperature }}°C, {{ description }}
+        | Nepali Date: {{ nepali_date }}
+       </P>
         <hr>
         <h2>News Portal</h2>
         <p>Explore the latest news and updates.</p>
@@ -9,6 +12,7 @@
             <form method="get" action="{% url 'home' %}">
                 <input type="text" name="q" placeholder="Search news..." value="{{ request.GET.q }}">
                 <button type="submit">Search</button>
+            </form>
         </div>
         
         {% for n in news %}
@@ -16,7 +20,7 @@
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
     
     <h3>
-        <a href="{% url 'news-detail' n.id %}" 
+        <a href="{% url 'news-detail' n.slug %}" 
            style="text-decoration: none; color: inherit;">
             {{ n.title }}
         </a>

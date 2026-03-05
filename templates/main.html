@@ -9,7 +9,28 @@
         {% if user.is_authenticated %}
 
             <a href="{% url 'logout' %}">Logout</a> | {{ request.jwt_user.username }}
-        {% else %}
+            |  {% now "F j, Y" %} | {% now "l" %}
+            
+            
+            {% comment %} <form method="post" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <select name="language" onchange="this.form.submit()">
+                    <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                    <option value="ne" {% if request.LANGUAGE_CODE == 'ne' %}selected{% endif %}>नेपाली</option>
+                </select>
+            </form><form method="post" action="{% url 'set_theme' %}">
+                {% csrf_token %}
+                <select name="theme" onchange="this.form.submit()">
+                    <option value="light" {% if request.COOKIES.theme == 'light' %}selected{% endif %}>Light</option>
+                    <option value="dark" {% if request.COOKIES.theme == 'dark' %}selected{% endif %}>Dark</option>
+                </select>
+            </form>
+            <form method = "POST" action = "{% url 'home' %}"  >
+                {% csrf_token %}
+                <input type="text" name="city" placeholder="Enter city name..." value="{{ request.POST.city }}">
+                <button type="submit">Get Weather</button>
+            </form> {% endcomment %}
+                   {% else %}
             <a href="{% url 'login' %}">Login</a>
             <a href="{% url 'register' %}">Register</a>
         {% endif %}
