@@ -2,9 +2,28 @@
 {% block content %}
 <div style="margin-bottom: 20px;">
     <a href="{% url 'home' %}">Back to Home</a>
+    
+    <a href="{% url 'bookmark_news' news.id %}" style="margin-left: 20px;">Bookmark</a>
+
     <h2>{{ news.title }}</h2>
     <img src="{{ news.images.url }}" alt="{{ news.title }}" style="max-width: 100%; height: auto;">
     <p>{{ news.content }}</p>
+</div>
+<div>
+    <h3>Related News</h3>
+    {% for related in related_news %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h4>
+                <a href="{% url 'news-detail' related.slug %}" 
+                   style="text-decoration: none; color: inherit;">
+                    {{ related.title }}
+                </a>
+            </h4>
+            <p>{{ related.content|truncatewords:10 }}</p>
+        </div>
+    {% empty %}
+        <p>No related news found.</p>
+    {% endfor %}
 </div>
 <div>
     <h3>Add Comments </h3>

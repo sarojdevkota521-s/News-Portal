@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+    <h2>{{ jwt_user.username }}'s Profile</h2>
+    <h3>Bookmarked News</h3>
+    {% for bookmark in bookmarks %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h4>
+                <a href="{% url 'news-detail' bookmark.news.slug %}" 
+                   style="text-decoration: none; color: inherit;">
+                    {{ bookmark.news.title }}
+                </a>
+            </h4>
+            <p>{{ bookmark.news.content|truncatewords:10 }}</p>
+        </div>
+    {% empty %}
+        <p>No bookmarked news found.</p>
+    {% endfor %}
+{% endblock %}
