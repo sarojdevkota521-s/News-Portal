@@ -55,6 +55,7 @@ def Home(request):
 
     q=request.GET.get('q') if request.GET.get('q')!=None else ''
     news = News.objects.filter(Q(title__icontains=q) | Q(content__icontains=q)| Q(tags__name__icontains=q)).order_by('-published_at').distinct()
+    break_news = News.objects.filter(is_breaking=True).order_by('-published_at')[:3]
     context={
         "jwt_user": request.jwt_user,
         "news": news,
@@ -63,6 +64,7 @@ def Home(request):
         "nepali_date": nepali_date,
         "chapawal_gold": chapawal_gold,
         "silver": silver,
+        "break_news":break_news
     }
     
     return render(request, "home.html", context)

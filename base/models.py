@@ -19,6 +19,7 @@ class News(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     content = RichTextField()
     view = models.PositiveIntegerField(default=0)
+    is_breaking = models.BooleanField(default=False)
     published_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

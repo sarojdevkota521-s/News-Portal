@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% block content%}
+
     {% if jwt_user %}
         <p>Welcome, <a style="text-decoration: none; " href="{% url 'profile_view' jwt_user.username %}">{{ jwt_user.username }}</a>!</p>
        <p>  Weather: {{ temperature }}°C, {{ description }}
@@ -14,6 +15,20 @@
                 <button type="submit">Search</button>
             </form>
         </div>
+
+        {% if break_news %}
+<div  >
+    <span>BREAKING</span>
+    
+    <marquee>
+        {% for news in break_news %}
+            <a href="{% url 'news-detail' news.slug %}">
+                {{ news.title }}
+            </a> |
+        {% endfor %}
+    </marquee>
+</div>
+{% endif %}
         
         {% for n in news %}
 
