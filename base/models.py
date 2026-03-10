@@ -50,3 +50,12 @@ class Bookmark(models.Model):
     
     class Meta:
         unique_together = ('user', 'news')
+
+
+class Scrapnews(models.Model):
+    title = models.CharField(max_length=500)
+    link = models.URLField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
