@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from accounts import views
-from .models import Tag, News, Comment, NewsView, Bookmark
+from .models import Tag, News, Comment, NewsView, Bookmark, Scrapnews
 
 from accounts.views import jwt_login_required  
 from django.db.models import Q, F
@@ -56,6 +56,9 @@ def Home(request):
     q=request.GET.get('q') if request.GET.get('q')!=None else ''
     news = News.objects.filter(Q(title__icontains=q) | Q(content__icontains=q)| Q(tags__name__icontains=q)).order_by('-published_at').distinct()
     break_news = News.objects.filter(is_breaking=True).order_by('-published_at')[:3]
+
+    s_news = Scrapnews.objects.all()
+
     context={
         "jwt_user": request.jwt_user,
         "news": news,
@@ -64,7 +67,8 @@ def Home(request):
         "nepali_date": nepali_date,
         "chapawal_gold": chapawal_gold,
         "silver": silver,
-        "break_news":break_news
+        "break_news":break_news,
+        "s_news":s_news
     }
     
     return render(request, "home.html", context)

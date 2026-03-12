@@ -29,16 +29,31 @@
     </marquee>
 </div>
 {% endif %}
-        
+<hr>
+<style>
+    .home-container{
+        display:grid;
+        grid-template-columns:1fr 3fr 2fr;
+
+    }
+</style>
+
+<div class = "home-container">
+    <div></div>
+        <div >
         {% for n in news %}
 
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <div style="border: 1px solid #ccc; padding: 5px; margin-bottom: 10px;">
     
-    <h3>
+    <h3>{% if n.is_breaking is True %}
+        <center>
+       -- Breaking news -- </center>
+       {% endif %}<br>
         <a href="{% url 'news-detail' n.slug %}" 
            style="text-decoration: none; color: inherit;">
             {{ n.title }}
         </a>
+        
     </h3>
 
     <img src="{{ n.images.url }}" alt="{{ n.title }}" style="max-width: 200px;">
@@ -61,6 +76,16 @@
         {% empty %}
         <h1>No news available.</h1>
         {% endfor %}
+</div>
+<div>
+    {% for s in s_news %}
+    <div style = " border: 1px solid #ccc; padding: 5px; margin-bottom: 5px; margin-left: 10px; "><a style="text-decoration: none; color: inherit;" href ="{{s.link}}">
+        <h3>{{s.title}}</h3> see more...</a>
+    </div> 
+    {% endfor %}
+</div>
+</div>
+
 
     {% else %}
         <p>Please log in or register to access the portal.</p>
