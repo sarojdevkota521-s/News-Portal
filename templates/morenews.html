@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block content%}
+<style>
+    .news-container{
+        display:grid;
+        grid-template-columns:1fr 3fr 1fr;
+
+    }
+</style>
+<div class = "news-container">
+<div> 
+
+</div>
+<div>
+    <a href= "{% url 'home' %}">back</a>
+    {% for s in s_news %}
+    <div style = " border: 1px solid #ccc; padding: 5px; margin-bottom: 5px; margin-left: 10px; "><a style="text-decoration: none; color: inherit;" href ="{{s.link}}">
+        <h3>{{s.title}}</h3> see more...</a>
+    </div> {% endfor %}
+</div>
+<div> 
+
+</div>
+</div>
+
+{% endblock %}

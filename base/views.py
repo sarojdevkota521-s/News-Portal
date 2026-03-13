@@ -74,6 +74,17 @@ def Home(request):
     return render(request, "home.html", context)
 
 @jwt_login_required
+def Scrape_news(request):
+    
+    s_news = Scrapnews.objects.all()
+    context={
+        
+        "s_news":s_news
+    }
+    return render(request, "morenews.html", context)
+
+
+@jwt_login_required
 def NewsDetail(request, slug):
     news = get_object_or_404(News, slug=slug)
     related_news = News.objects.filter(tags__in=news.tags.all()).exclude(id=news.id)[:5]

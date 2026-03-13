@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.Home, name='home'),
     path('news/<slug:slug>/', views.NewsDetail, name='news-detail'), 
+    path('More-news',views.Scrape_news, name="scrape-news"),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('add-comment/<int:id>/', views.AddComment, name='add_comment'),
     path('bookmark/<int:id>/', views.BookmarkNews, name='bookmark_news'),
