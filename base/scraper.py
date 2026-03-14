@@ -16,7 +16,6 @@ for title in titles:
     # print("------------------")
     print(f"Heading: {title.get_text(strip=True)}")
     
-    # 2. Look for a link INSIDE the h2
     link_tag = title.find("a")
     if link_tag and link_tag.has_attr('href'):
         print(f"Link: {link_tag["href"]}")
